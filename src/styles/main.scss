@@ -1,0 +1,14 @@
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    &__navbar {
+        height: 938px;
+        width: 250px;
+    }
+    &__topbar {
+        
+    }
+  }
