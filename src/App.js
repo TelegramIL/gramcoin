@@ -10,6 +10,9 @@ const App = () => (
     </div>
     <div className='main-container__topbar'>
       <Header/>
+    <div className='main-container__rightcon'>
+
+    </div>
     </div>
   </div>
 );
