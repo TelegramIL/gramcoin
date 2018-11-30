@@ -9,9 +9,6 @@ import { Button, Navbar, FormGroup, FormControl } from 'react-bootstrap';
         return (
         <Navbar>
         <Navbar.Header>
-            <Navbar.Brand>
-            <a href="#home">Brand</a>
-            </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
