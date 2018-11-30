@@ -1,5 +1,4 @@
 import React from "react";
-from 'react-bootstrap';
 import { GetGroups } from '../constants/grouptypes';
 
  export class Main extends React.Component
