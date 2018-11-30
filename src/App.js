@@ -11,9 +11,9 @@ const App = () => (
     </div>
     <div className='main-container__topbar'>
       <Header/>
+    </div>
     <div className='main-container__rightcon'>
       <Main/>
-    </div>
     </div>
   </div>
 );
