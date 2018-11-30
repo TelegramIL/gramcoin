@@ -1,5 +1,5 @@
 import React from "react";
-import { GetGroups } from '../constants/grouptypes';
+import { GetGroups } from '../../constants/grouptypes';
 
  export class Main extends React.Component
 {
