@@ -1,6 +1,7 @@
 import React from "react";
 import  Navigation  from './components/navbar/Navbar'
 import { Header } from './components/header/Header'
+import { Main } from './components/main/Main'
 import  './styles/main.scss'
 
 const App = () => (
@@ -11,8 +12,7 @@ const App = () => (
     <div className='main-container__topbar'>
       <Header/>
     <div className='main-container__rightcon'>
-      <div> 1111 </div>
-       <div> 2222 </div>
+      <Main/>
     </div>
     </div>
   </div>
