@@ -9,7 +9,8 @@
     &__right_container {
         display: flex;
         flex-direction: column;
-        padding-left: 64px
+        align-items: flex-start;
+        padding-left: 75px;
         &__topbar {
             height: 64px;
             width: 1100px;   

@@ -1,0 +1,18 @@
+.submit_container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px groove;
+    border-radius: 25px;
+    width: auto;
+    height: auto;
+    &__desc {
+        width: 300px;
+        height: 400px;   
+        text-align: justify;
+    }
+    &__link {
+        width: 300px;
+        height: auto;
+    }
+    
+}
