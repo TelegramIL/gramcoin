@@ -1,63 +1,106 @@
-import React, { Component } from 'react'
-import MuuriGrid from 'react-muuri';
-import './MuuriGrid.css'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { GetGroups } from '../../constants/grouptypes';
 
-class SampleComponent extends Component {
-  constructor () {
-    super();
+// fake data generator
+const getItems = count =>
+  Array.from({ length: count }, (v, k) => k).map(k => ({
+    id: `item-${k}`,
+    content: `item ${k}`,
+  }));
 
-    this.removeElement = this.removeElement.bind(this);
+// a little function to help us with reordering the result
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+const grid = 8;
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: 'none',
+  padding: grid * 2,
+  margin: `0 0 ${grid}px 0`,
+
+  // change background colour if dragging
+  background: isDragging ? 'lightgreen' : 'grey',
+
+  // styles we need to apply on draggables
+  ...draggableStyle,
+});
+
+const getListStyle = isDraggingOver => ({
+  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  padding: grid,
+  width: 250,
+});
+
+class Groups extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: GetGroups(),
+    };
+    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
-  componentDidMount () {
-    this.grid = new MuuriGrid({
-      node: this.gridElement,
-      defaultOptions: {
-        dragEnabled: true // See Muuri's documentation for other option overrides.
-      },
-    });
-
-    // An example of how to use `getEvent()` to make `synchronize()` update the grid.
-    this.grid.getEvent('dragEnd'); 
-  }
-
-  componentWillUnmount () {
-    this.grid.getMethod('destroy'); // Required: Destroy the grid when the component is unmounted.
-  }
-
-  removeElement () {
-    // An example of how to use `getMethod()` to remove an element from the grid.
-    if (this.gridElement && this.gridElement.children.length) {
-      this.grid.getMethod('remove', this.gridElement.children[0], {removeElements: true});
+  onDragEnd(result) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
     }
+
+    const items = reorder(
+      this.state.items,
+      result.source.index,
+      result.destination.index
+    );
+
+    this.setState({
+      items,
+    });
   }
 
-  render () {
+  // Normally you would want to split things out into separate components.
+  // But in this example everything is just done in one place for simplicity
+  render() {
     return (
-      <div>
-        {/* Assign a ref to the grid container so the virtual DOM will ignore it for now (WIP). */}
-        <div ref={gridElement => this.gridElement = gridElement}>
-          {/* Required: `item` and `item-content` classNames */}
-          <div className="item box1">
-            <div className="item-content">
-              Box 1
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              {this.state.items.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                      {item.content}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
             </div>
-          </div>
-          <div className="item box2">
-            <div className="item-content">
-              Box 2
-            </div>
-          </div>
-        </div>
-        <button
-          className="button"
-          onClick={() => this.removeElement()}
-        >
-          Remove 1st Element
-        </button>
-      </div>
-    )
+          )}
+        </Droppable>
+      </DragDropContext>
+    );
   }
 }
 
-export default SampleComponent;
+export default Groups;

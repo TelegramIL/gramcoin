@@ -1,7 +1,10 @@
+import React, { Component } from 'react';
+
 const groups = 
 [
- { key: 'buy', value: 'Buy&Sell'},
- { key: 'study', value: 'Education'}
+ { id: 'buy',   content: 'Buy&Sell'},
+ { id: 'study', content: 'Education'},
+ { id: 'business', content: 'Business' }
 ]
 
 export function GetGroups()

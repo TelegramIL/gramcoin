@@ -5,17 +5,19 @@ import { Main } from './components/main/Main'
 import  './styles/main.scss'
 
 const App = () => (
-  <div className='main-container'>
-    <div className='main-container__navbar'>
-      <Navigation/>
+    <div className='main-container'>
+        <div className='main-container__navbar'>
+          <Navigation/>
+        </div>   
+      <div className='main-container__right_container'>
+        <div className='main-container__right_container__topbar'>
+          <Header/>
+        </div>
+        <div className='main-container__right_container__rightcon'>
+          <Main/>
+        </div>
+      </div>
     </div>
-    <div className='main-container__topbar'>
-      <Header/>
-    </div>
-    <div className='main-container__rightcon'>
-      <Main/>
-    </div>
-  </div>
 );
 
 export default App;
