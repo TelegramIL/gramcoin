@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { GetGroups } from '../../constants/grouptypes';
 
-// fake data generator
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
+
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -20,15 +13,29 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 const grid = 8;
+const handleGroup = (groupId) => {
+    console.log(groupId);
+}
+
+const _BYU='Buy&Sell'
+const _STUDY = 'Education'
+const _BUSINESS = 'Business'
+
+const groups = 
+[
+ { id: 'buy',   content: <button type="button" className='group_button' onClick={() => handleGroup(_BYU)}>{_BYU}</button> },
+ { id: 'study', content: <button type="button" className='group_button' onClick={() => handleGroup(_STUDY)}>{_STUDY}</button> },
+ { id: 'business', content: <button type="button" className='group_button' onClick={() => handleGroup(_BUSINESS)}>{_BUSINESS}</button>}
+]
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
-  padding: grid * 2,
+  padding: 10,
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? 'lightgreen' : 'blue',
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -44,7 +51,7 @@ class Groups extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: GetGroups(),
+      items: groups,
     };
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -78,7 +85,7 @@ class Groups extends Component {
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {this.state.items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable key={item.id} draggableId={item.id} index={index}  disableInteractiveElementBlocking={true}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
