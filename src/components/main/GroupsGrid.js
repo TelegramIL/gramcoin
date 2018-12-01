@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+import { Button, Navbar, FormGroup, FormControl } from 'react-bootstrap';
 
 
 // a little function to help us with reordering the result
@@ -23,9 +23,9 @@ const _BUSINESS = 'Business'
 
 const groups = 
 [
- { id: 'buy',   content: <button type="button" className='group_button' onClick={() => handleGroup(_BYU)}>{_BYU}</button> },
- { id: 'study', content: <button type="button" className='group_button' onClick={() => handleGroup(_STUDY)}>{_STUDY}</button> },
- { id: 'business', content: <button type="button" className='group_button' onClick={() => handleGroup(_BUSINESS)}>{_BUSINESS}</button>}
+ { id: 'buy',   content: <Button type="button" className='group_button' onClick={() => handleGroup(_BYU)}>{_BYU}</Button> },
+ { id: 'study', content: <Button type="button" className='group_button' onClick={() => handleGroup(_STUDY)}>{_STUDY}</Button> },
+ { id: 'business', content: <Button type="button" className='group_button' onClick={() => handleGroup(_BUSINESS)}>{_BUSINESS}</Button>}
 ]
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -35,7 +35,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'blue',
+  background: isDragging ? 'lightgreen' : 'lightblue',
 
   // styles we need to apply on draggables
   ...draggableStyle,
