@@ -14,9 +14,6 @@ const App = () => (
         <div className='main-container__right_container__topbar'>
           <Header/>
         </div>
-        <div>
-          <SubmitForm/>
-        </div>
         <div className='main-container__right_container__rightcon'>
           <Main/>
         </div>
