@@ -11,7 +11,7 @@ export class SubmitForm extends Component {
     return (
       <Container className="submit_container">
         <h2>Submit Group</h2>
-        <Form className="form" onSubmit={ (e) => console.log(e) }>
+        <Form className="form" onSubmit={ () => console.log("tesr'") }>
           <Col>
             <FormGroup>
               <Label>Group Name</Label>
