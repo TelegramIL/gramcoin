@@ -13,7 +13,7 @@ const Navigation = () => (
         <Route render={({ location, history }) => (
             <div className='main-container'>
                 <div className='main-container__navbar'>
-                    <SideNav
+                    <SideNav style={{backgroundColor: '#0088cc'}}
                         onSelect={(selected) => {
                             const to = '/' + selected;
                             if (location.pathname !== to) {
