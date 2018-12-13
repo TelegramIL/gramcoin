@@ -5,6 +5,7 @@ import {
   Button, FormText,
 } from 'reactstrap';
 import '../../styles/submit.scss';
+import AddGroup from '../../storage/datahandler';
 
 export class SubmitForm extends Component {
   constructor() {
@@ -18,19 +19,36 @@ export class SubmitForm extends Component {
     this.data = null;
   }
 
-   updateGroupName(value){
-    this.data = value;
-  }
-
   handleSubmit(event) {
     this.data = {groupname: event.groupname.value, description: event.description.value, link: event.link.value, password: event.password.value}
+    //AddGroup(this.data);
+      //event.preventDefault();
+      //const data = new FormData(event.target);
+      
+    //   fetch('http://localhost:3001/submit/', {
+    //     method: 'POST',
+    //     mode: 'no-cors',
+    //     body: 'vasya',
+    //   })
+    //   .then(function(response) {  
+    //     console.log(response.headers.get('Content-Type'));  
+    //     console.log(response.headers.get('Date'));
+    
+    //     console.log(response.status);  
+    //     console.log(response.statusText);  
+    //     console.log(response.type);  
+    //     console.log(response.url);  
+    // }).catch(function(error) {  
+    //   console.log('Request failed', error)  
+    // });
   }
+  
 
   render() {
     return (
       <Container className="submit_container">
         <h2>Submit Group</h2>
-        <Form className="form" onSubmit={(e) => this.handleSubmit(e.target)}>
+        <Form target='_blank' method='POST' action="http://localhost:3001/submit/" className="form" onSubmit={(e) => this.handleSubmit(e.target)}>
           <Col>
             <FormGroup>
               <Label>Group Name</Label>
@@ -39,7 +57,6 @@ export class SubmitForm extends Component {
                 name="text"
                 id="groupname"
                 placeholder="Group Name..."
-                onChange = {(e) => this.updateGroupName(e.target.value)}
               />
             </FormGroup>
           </Col>
