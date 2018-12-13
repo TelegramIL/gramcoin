@@ -7,11 +7,30 @@ import {
 import '../../styles/submit.scss';
 
 export class SubmitForm extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      email: '',
+      name: ''
+    };
+
+    this.data = null;
+  }
+
+   updateGroupName(value){
+    this.data = value;
+  }
+
+  handleSubmit(event) {
+    this.data = {groupname: event.groupname.value, description: event.description.value, link: event.link.value, password: event.password.value}
+  }
+
   render() {
     return (
       <Container className="submit_container">
         <h2>Submit Group</h2>
-        <Form className="form" onSubmit={ () => console.log("tesr'") }>
+        <Form className="form" onSubmit={(e) => this.handleSubmit(e.target)}>
           <Col>
             <FormGroup>
               <Label>Group Name</Label>
@@ -20,6 +39,7 @@ export class SubmitForm extends Component {
                 name="text"
                 id="groupname"
                 placeholder="Group Name..."
+                onChange = {(e) => this.updateGroupName(e.target.value)}
               />
             </FormGroup>
           </Col>
@@ -29,7 +49,7 @@ export class SubmitForm extends Component {
               <Input
                 type="textarea"
                 name="text"
-                id="groupdesc"
+                id="description"
                 placeholder="Group Description..."
                 className='submit_container__desc'
               />
@@ -41,7 +61,7 @@ export class SubmitForm extends Component {
               <Input
                 type="textarea"
                 name="text"
-                id="grouplink"
+                id="link"
                 placeholder="Telegram link..."
                 className='submit_container__link'
               />
@@ -53,7 +73,7 @@ export class SubmitForm extends Component {
               <Input
                 type="password"
                 name="password"
-                id="examplePassword"
+                id="password"
                 placeholder="********"
               />
               <FormText>Remember your password for future modifications.</FormText> 
