@@ -57,6 +57,7 @@ export class SubmitForm extends Component {
                 name="text"
                 id="groupname"
                 placeholder="Group Name..."
+                autoComplete="off"
               />
             </FormGroup>
           </Col>
